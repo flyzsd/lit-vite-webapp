@@ -31,6 +31,8 @@ export class MyElement extends LitElement {
   count = 0
 
   render() {
+    console.log(import.meta.env);
+    console.log('hello3');
     return html`
       <h1>Hello, ${this.name}!</h1>
       <button @click=${this._onClick} part="button">

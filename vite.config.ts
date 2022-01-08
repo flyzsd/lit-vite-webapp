@@ -1,14 +1,16 @@
-import { defineConfig } from 'vite'
+import {resolve} from 'path'
+import {defineConfig} from 'vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  build: {
-    lib: {
-      entry: 'src/my-element.ts',
-      formats: ['es']
-    },
-    rollupOptions: {
-      external: /^lit/
+    build: {
+        rollupOptions: {
+            input: {
+                main: resolve(__dirname, 'index.html'),
+                nested: resolve(__dirname, 'nested/index.html')
+            }
+        },
+        target: 'esnext',
+        sourcemap: true
     }
-  }
 })
