@@ -1,9 +1,11 @@
 {
   "compilerOptions": {
     "module": "esnext",
+    "target": "esnext",
     "lib": ["esnext", "dom", "dom.iterable"],
     "types": ["vite/client"],
     "declaration": true,
+    "declarationMap": true,
     "emitDeclarationOnly": true,
     "isolatedModules": true,
     "outDir": "./types",
