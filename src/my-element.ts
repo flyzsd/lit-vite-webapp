@@ -1,8 +1,13 @@
 import { html, css, LitElement } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
+import { styleMap } from 'lit/directives/style-map.js';
 import { debounce } from 'lodash-es';
+import './components/my-page.js';
 
 console.log(debounce);
+
+const mainColor = css`red`;
 
 /**
  * An example element.
@@ -19,22 +24,35 @@ export class MyElement extends LitElement {
       padding: 16px;
       max-width: 800px;
     }
+
+    :host([active]) {
+      border: 1px solid ${mainColor};
+    }
   `;
 
-  @state() 
+  @property({ type: Boolean, reflect: true })
+  active: boolean = true;
+
+  @state()
   private end: number | null = null;
 
   /**
    * The name to say "Hello" to.
    */
   @property({ attribute: false })
-  name = 'World';
+  name?: string = 'World';
 
   /**
    * The number of times the button has been clicked.
    */
   @property({ type: Number })
   count = 0;
+
+  @state()
+  classes = { someclass: true, anotherclass: true };
+
+  @state()
+  styles = { color: 'lightgreen', fontFamily: 'Roboto' };
 
   render() {
     console.log(import.meta.env);
@@ -46,6 +64,10 @@ export class MyElement extends LitElement {
         Click Count: ${this.count}
       </button>
       <slot></slot>
+      <my-page></my-page>
+      <div class=${classMap(this.classes)} style=${styleMap(this.styles)}>
+        Some content
+      </div>
     `
   }
 
